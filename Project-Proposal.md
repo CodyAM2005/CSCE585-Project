@@ -1,5 +1,4 @@
-# Project Title
-How Many Latent Layers Are Enough? Exploring the Impact of Latent Depth in VLMs
+# How Many Latent Layers Are Enough? Exploring the Impact of Latent Depth in VLMs
 
 ## Team and Responsibilities
 Team members:  
