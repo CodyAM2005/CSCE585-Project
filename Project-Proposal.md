@@ -32,11 +32,11 @@ SCOPE: Because of the time, size of team, and cost of this project, building a S
 ## Evaluation Plan
 We will compare the pruned VLM against the original, unpruned model using the same benchmark tasks and evaluation conditions established during the replication phase. The original model will serve as the control.
 We will measure:
-Task performance: Accuracy or the benchmark’s provided performance metric.
-Inference latency: Average time required to generate an output.
-GPU memory usage: Resources required during inference.
-Model size: Number of remaining layers and parameters.
-Performance-efficiency tradeoff: Performance relative to reductions in latency, memory usage, and model size.
+- **Task performance**: Accuracy or the benchmark’s provided performance metric.
+- **Inference latency**: Average time required to generate an output.
+- **GPU memory usage**: Resources required during inference.
+- **Model size**: Number of remaining layers and parameters.
+- **Performance-efficiency tradeoff**: Performance relative to reductions in latency, memory usage, and model size.
 Each pruning configuration will be evaluated using the same datasets, prompts, hardware, and procedures as the baseline. If fine-tuning is performed after pruning, we will compare performance before and after fine-tuning.
 Results will be quantitatively compared to the unpruned model and presented using tables and plots showing how performance and efficiency change as layers are removed. A pruning approach will be considered successful if it provides a meaningful reduction in inference cost while maintaining performance comparable to the original model.
 ## Expected Deliverables
@@ -55,8 +55,8 @@ Source code, configuration files, automated experiment scripts, raw and processe
 | 12 | Gather and Analyze Data for Final Presentation | When enough data is gathered to be sufficient for presentation | TBD |
 | 13–14 | Gather Data for Final Presentation / Composition of Final Presentation | When presentation is complete | Team |
 ## Risks and Mitigations
-Experiments may be computationally expensive or take too long. To mitigate this we will begin with smaller models, limited datasets, and a small set of layer configurations before scaling up the most promising experiments.
-Results may vary across models or random seeds. To mitigate this, we will repeat key experiments with multiple seeds and report averages and variability rather than relying on one run.
+- Experiments may be computationally expensive or take too long. To mitigate this we will begin with smaller models, limited datasets, and a small set of layer configurations before scaling up the most promising experiments.
+- Results may vary across models or random seeds. To mitigate this, we will repeat key experiments with multiple seeds and report averages and variability rather than relying on one run.
 ## Reproducibility Plan
 Any dependencies, versions, etc will be listed here as we work on our project.
 ## References
