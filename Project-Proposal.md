@@ -60,6 +60,6 @@ Source code, configuration files, automated experiment scripts, raw and processe
 ## Reproducibility Plan
 Any dependencies, versions, etc will be listed here as we work on our project.
 ## References
-Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B., Chess, B., Child, R., ... & Amodei, D. (2020). Scaling laws for neural language models. arXiv preprint arXiv:2001.08361.
-Liu, H., Li, C., Wu, Q., & Lee, Y. J. (2023). Visual instruction tuning. Advances in neural information processing systems, 36, 34892-34916.
+Kaplan, J., McCandlish, S., Henighan, T., Brown, T. B., Chess, B., Child, R., ... & Amodei, D. (2020). Scaling laws for neural language models. arXiv preprint arXiv:2001.08361.  
+Liu, H., Li, C., Wu, Q., & Lee, Y. J. (2023). Visual instruction tuning. Advances in neural information processing systems, 36, 34892-34916.  
 Liu, Y., Ning, J., Xia, S., Gao, X., Qiang, N., Ge, B., ... & Hu, X. (2025). Pruning large language models by identifying and preserving functional networks. arXiv preprint arXiv:2508.05239.
