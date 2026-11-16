@@ -1,5 +1,5 @@
 # Project Title  
-## ow Many Latent Layers Are Enough? Exploring the Impact of Latent Depth in VLAs  
+## How Many Latent Layers Are Enough? Exploring the Impact of Latent Depth in VLAs  
 
 ## Group Info  
 - Cody Miller   
