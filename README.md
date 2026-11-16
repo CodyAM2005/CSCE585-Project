@@ -26,17 +26,10 @@
 ⚠️ Note: Please do not include more than 3 bullet points per section.  
 
 ## Contribution  
-- [`Replication of existing work`]  
-- [`Extension of existing work`]  
-- [`Novel contribution`]  
-
-Please select one or multiple tags that apply. Example:  
 ### [`Replication of existing work`], [`Extension of existing work`]  
-We use paper_1 [citation] to reproduce their results. We improve their method as follows:  
+We use 'VLA-Adapter: An Effective Paradigm for Tiny-Scale Vision-Language-Action Model' [citation] to reproduce their results. We improve their method as follows:  
 - Contribution 1  
 - Contribution 2  
-
-Note: This has no impact on your grade as long as you properly follow the procedure (e.g., problem identification, motivation, method, discussion, results, conclusion). Choosing [`Novel contribution`] will not give you any advantage over [`Replication of existing work`].  
 
 ## References  
 ### `BibTeX` of all references used in the project. Can be included as a `references.bib` file in the repo.  
