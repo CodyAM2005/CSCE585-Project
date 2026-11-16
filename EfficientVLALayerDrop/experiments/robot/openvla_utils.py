@@ -320,17 +320,6 @@ def get_vla(cfg: Any) -> torch.nn.Module:
     # Set number of images in model input
     vla.vision_backbone.set_num_images_in_input(cfg.num_images_in_input)
 
-    # Layer drop: the action head never consumes the final LLM decoder layer, so physically remove it
-    # to skip its compute (for latency measurements). The final RMSNorm is replaced with Identity so the
-    # last returned hidden state is the raw output of layer N-1, exactly what the head was trained on.
-    # NOTE: this makes LM logits meaningless, which is fine for the L1 regression action head.
-    if getattr(cfg, "drop_last_llm_layer", False):
-        lm = vla.language_model.model
-        lm.layers = lm.layers[:-1]
-        lm.norm = torch.nn.Identity()
-        vla.language_model.config.num_hidden_layers = len(lm.layers)
-        print(f"Dropped final LLM decoder layer; {len(lm.layers)} layers remain.")
-
     vla.eval()
 
     # Move model to device if not using quantization

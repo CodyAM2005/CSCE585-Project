@@ -190,7 +190,6 @@ class GenerateConfig:
     # fmt: on
     save_version: str = "vla-adapter"                # version of 
     use_pro_version: bool = True                     # encourage to use the pro models we released.
-    drop_last_llm_layer: bool = True                 # Physically remove the final LLM layer (unused by the action head) to save compute
     phase: str = "Inference"
 
 
