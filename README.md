@@ -1,13 +1,13 @@
 # Project Title  
-## Title of the Project  
+## ow Many Latent Layers Are Enough? Exploring the Impact of Latent Depth in VLAs  
 
 ## Group Info  
-- Student_1 full name  
-  - Email: student1@email.sc.edu  
-- Student_2 full name  
-  - Email: student2@email.sc.edu  
-- Student_3 full name  
-  - Email: student3@email.sc.edu  
+- Cody Miller   
+  - Email: codyam@email.sc.edu  
+- Ian Attmore  
+  - Email: iattmore@email.sc.edu  
+- Dave Ringler  
+  - Email: dringler@email.sc.edu  
 
 ## Project Summary/Abstract  
 ### A short summary of the project (3–5 sentences maximum).  
