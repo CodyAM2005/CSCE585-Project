@@ -46,7 +46,7 @@ torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
   --image_aug True \
   --num_steps_before_decay 200000 \
   --max_steps 200005 \
-  --save_freq 2500 \
+  --save_freq 10000 \
   --save_latest_checkpoint_only False \
   --merge_lora_during_training True \
   --batch_size 8 \
@@ -56,5 +56,5 @@ torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
   --use_pro_version True \
   --wandb_entity "vla-adapter" \
   --wandb_project "$data_name" \
-  --run_id_note spatial_layerdrop_half_dataset \
+  --run_id_note spatial_last_layerdrop_full_dataset \
   > logs/VLA-Adapter--libero_spatial_no_noops_A100_last_layer_drop_full_dataset--$current_time.log
