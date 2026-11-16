@@ -6,15 +6,15 @@
 #SBATCH --mem=32G
 #SBATCH --time=48:00:00
 #SBATCH --account=rc_general
-#SBATCH --output=/work/%u/vla-adapter/EfficientVLALayerDrop/hpc_logs/qwt_%j/accuracy.out
-#SBATCH --error=/work/%u/vla-adapter/EfficientVLALayerDrop/hpc_logs/qwt_%j/log.err
+#SBATCH --output=/work/%u/vla-adapter/CSCE585-Project/EfficientVLALayerDrop/hpc_logs/qwt_%j/accuracy.out
+#SBATCH --error=/work/%u/vla-adapter/CSCE585-Project/EfficientVLALayerDrop/hpc_logs/qwt_%j/log.err
 
 set -euo pipefail
 
 source /home/apps/anaconda/3.12/etc/profile.d/conda.sh
 conda activate vla-adapter
 
-cd /work/codyam/vla-adapter/EfficientVLALayerDrop
+cd /work/codyam/vla-adapter/CSCE585-Project/EfficientVLALayerDrop
 mkdir -p logs
 
 hostname
@@ -23,13 +23,13 @@ nvidia-smi
 data_name=libero_spatial_no_noops
 current_time=$(date +%Y%m%d_%H%M%S)
 
-export PYTHONPATH=${PYTHONPATH:-}:/work/codyam/vla-adapter/EfficientVLA/LIBERO
+export PYTHONPATH=${PYTHONPATH:-}:/work/codyam/vla-adapter/CSCE585-Project/EfficientVLA/LIBERO
 export OMP_NUM_THREADS=2
 export MKL_NUM_THREADS=2
 export TF_NUM_INTRAOP_THREADS=1
 export TF_NUM_INTEROP_THREADS=1
 
-export KEEP_TASK_IDS="7,1,6,2,0"
+export KEEP_TASK_IDS="0,1,2,3,4,5,6,7,8,9"
 
 torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
   --vlm_path pretrained_models/prism-qwen25-extra-dinosiglip-224px-0_5b \
@@ -57,4 +57,4 @@ torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
   --wandb_entity "vla-adapter" \
   --wandb_project "$data_name" \
   --run_id_note spatial_layerdrop_half_dataset \
-  > logs/VLA-Adapter--libero_spatial_no_noops_A100_layer_drop_half_dataset--$current_time.log
+  > logs/VLA-Adapter--libero_spatial_no_noops_A100_last_layer_drop_full_dataset--$current_time.log

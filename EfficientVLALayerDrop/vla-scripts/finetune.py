@@ -124,6 +124,7 @@ class FinetuneConfig:
 
     # revision version
     use_pro_version: bool = True                             # the version number
+    drop_last_llm_layer: bool = True                         # Physically remove the final LLM layer (unused by the action head) to save compute
     phase: str = "Training"
     # fmt: on
 
@@ -397,7 +398,9 @@ def run_forward_pass(
         multi_layer_hidden_states = []
         
         hidden_states = list(output.hidden_states)
-        filtered_hidden_states = hidden_states[:-1]   # drop the final layer's output
+        # Keep [embeddings, layer_1 .. layer_{N-1}] (final layer dropped). Slicing to (num_blocks + 1)
+        # works whether or not the final decoder layer was physically removed (cfg.drop_last_llm_layer).
+        filtered_hidden_states = hidden_states[: len(action_head.module.model.mlp_resnet_blocks) + 1]
 
         for item in filtered_hidden_states[0:]:
             # last_hidden_states = output.hidden_states[-1]  # (B, seq_len, D)
@@ -831,6 +834,18 @@ def finetune(cfg: FinetuneConfig) -> None:
 
     # Set number of images in VLA input
     vla.vision_backbone.set_num_images_in_input(cfg.num_images_in_input)
+
+    # Layer drop: the action head never consumes the final LLM decoder layer, so remove it to skip its
+    # compute. Final RMSNorm -> Identity so the last returned hidden state is the raw output of layer N-1
+    # (matches inference in experiments/robot/openvla_utils.py). LM logits/loss become meaningless,
+    # so this is only valid with the L1 regression action head.
+    if cfg.drop_last_llm_layer:
+        assert cfg.use_l1_regression, "drop_last_llm_layer requires use_l1_regression=True"
+        lm = vla.language_model.model
+        lm.layers = lm.layers[:-1]
+        lm.norm = torch.nn.Identity()
+        vla.language_model.config.num_hidden_layers = len(lm.layers)
+        print(f"Dropped final LLM decoder layer; {len(lm.layers)} layers remain.")
 
     # vla.set_version(cfg.version)
 

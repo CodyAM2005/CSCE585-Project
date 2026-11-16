@@ -36,4 +36,5 @@ python experiments/robot/libero/run_libero_eval.py \
    --task_suite_name libero_spatial \
    --task_ids "$KEEP_TASK_IDS" \
    --use_pro_version True \
+   --drop_last_llm_layer True \
    > eval_logs/Spatial_A100_one_layer_drop_full_dataset--chkpt.log 
