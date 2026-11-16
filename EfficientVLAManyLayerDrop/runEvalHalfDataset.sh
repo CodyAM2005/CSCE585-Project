@@ -6,21 +6,21 @@
 #SBATCH --mem=32G
 #SBATCH --time=24:00:00
 #SBATCH --account=rc_general
-#SBATCH --output=/work/%u/vla-adapter/EfficientVLAManyLayerDrop/hpc_logs/qwt_%j/accuracy.out
-#SBATCH --error=/work/%u/vla-adapter/EfficientVLAManyLayerDrop/hpc_logs/qwt_%j/log.err
+#SBATCH --output=/work/%u/vla-adapter/CSCE585-Project/EfficientVLAManyLayerDrop/hpc_logs/qwt_%j/accuracy.out
+#SBATCH --error=/work/%u/vla-adapter/CSCE585-Project/EfficientVLAManyLayerDrop/hpc_logs/qwt_%j/log.err
 
 set -euo pipefail
 
 source /home/apps/anaconda/3.12/etc/profile.d/conda.sh
 conda activate vla-adapter
 
-cd /work/codyam/vla-adapter/EfficientVLAManyLayerDrop
+cd /work/codyam/vla-adapter/CSCE585-Project/EfficientVLAManyLayerDrop
 mkdir -p eval_logs
 
 hostname
 nvidia-smi
 
-export PYTHONPATH=${PYTHONPATH:-}:/work/codyam/vla-adapter/EfficientVLA/LIBERO
+export PYTHONPATH=${PYTHONPATH:-}:/work/codyam/vla-adapter/CSCE585-Project/EfficientVLA/LIBERO
 export OMP_NUM_THREADS=2
 export MKL_NUM_THREADS=2
 export TF_NUM_INTRAOP_THREADS=1
@@ -32,7 +32,7 @@ python experiments/robot/libero/run_libero_eval.py \
    --use_proprio True \
    --num_images_in_input 2 \
    --use_film False \
-   --pretrained_checkpoint /work/codyam/vla-adapter/EfficientVLAManyLayerDrop/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--spatial_many_layerdrop_half_dataset--40000_chkpt \
+   --pretrained_checkpoint /work/codyam/vla-adapter/CSCE585-Project/EfficientVLAManyLayerDrop/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--spatial_many_layerdrop_half_dataset--40000_chkpt \
    --task_suite_name libero_spatial \
    --task_ids "$KEEP_TASK_IDS" \
    --use_pro_version True \
