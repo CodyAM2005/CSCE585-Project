@@ -32,8 +32,8 @@ python experiments/robot/libero/run_libero_eval.py \
    --use_proprio True \
    --num_images_in_input 2 \
    --use_film False \
-   --pretrained_checkpoint /work/codyam/vla-adapter/CSCE585-Project/EfficientVLA/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--VLA-Adapter--libero_spatial_no_noops_A100_layer_drop----40000_chkpt \
+   --pretrained_checkpoint /work/codyam/vla-adapter/CSCE585-Project/EfficientVLALayerDrop/outputs/configs+libero_spatial_no_noops+b16+lr-0.0002+lora-r64+dropout-0.0--image_aug--spatial_last_layerdrop_full_dataset--80000_chkpt \
    --task_suite_name libero_spatial \
    --task_ids "$KEEP_TASK_IDS" \
    --use_pro_version True \
-   > eval_logs/Spatial_A100_one_layer_drop_full_dataset--chkpt.log 
+   > eval_logs/Spatial_A100_last_one_layer_drop_full_dataset--chkpt.log 
