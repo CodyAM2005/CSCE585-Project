@@ -56,5 +56,5 @@ torchrun --standalone --nnodes 1 --nproc-per-node 1 vla-scripts/finetune.py \
   --use_pro_version True \
   --wandb_entity "vla-adapter" \
   --wandb_project "$data_name" \
-  --run_id_note spatial_twelve_layerdrop_half_dataset \
-  > logs/VLA-Adapter--libero_spatial_no_noops_A100_twelve_layer_drop_half_dataset--$current_time.log
+  --run_id_note spatial_twelve_last_layerdrop_half_dataset \
+  > logs/VLA-Adapter--libero_spatial_no_noops_A100_twelve_last_layer_drop_half_dataset--$current_time.log
