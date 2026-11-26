@@ -850,7 +850,7 @@ class OpenVLAForActionPrediction(PrismaticForConditionalGeneration):
         # Must match the layer filtering in vla-scripts/finetune.py, otherwise the
         # action head's per-block layer indices are misaligned at inference time.
         hidden_states = list(language_model_output.hidden_states)
-        filtered_hidden_states = (hidden_states[:7] + hidden_states[19:])
+        filtered_hidden_states = hidden_states[:-12]   # drop the final 12 layers' outputs
         for item in filtered_hidden_states:
             # last_hidden_states = output.hidden_states[-1]  # (B, seq_len, D)
             # Get hidden states for text portion of prompt+response (after the vision patches)

@@ -397,7 +397,7 @@ def run_forward_pass(
         multi_layer_hidden_states = []
         
         hidden_states = list(output.hidden_states)
-        filtered_hidden_states = (hidden_states[:7] + hidden_states[19:])
+        filtered_hidden_states = hidden_states[:-12]   # drop the final 12 layers' outputs
 
         for item in filtered_hidden_states[0:]:
             # last_hidden_states = output.hidden_states[-1]  # (B, seq_len, D)
