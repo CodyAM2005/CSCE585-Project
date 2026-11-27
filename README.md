@@ -69,14 +69,16 @@ CSCE585-Project/
 │   ├── run_end_removal_latency.sh #   Slurm batch script running k=0,1,3 back-to-back on one GPU/node
 │   ├── summarize_end_removal.py   #   combines per-k JSON results into a markdown/CSV table
 │   └── results/                   #   (created when you run it) per-run JSON + summary tables — not tracked in git
+├── data/                          # (populated by result.py) per-run summary CSV/JSON + a latency plot — tracked in git
+├── run.sh                         # root entry point: submits latency_bench/run_end_removal_latency.sh via sbatch
+├── result.py                      # root entry point: summarizes + plots a run's results into data/
 ├── Project-Proposal.md
 ├── CSCE585_Partial_Results.pdf
 ├── 585 Presentation.pptx
 └── README.md
 ```
 
-⚠️ Deviation from the course template: the mandatory root-level `run.<ext>` / `result.<ext>` / `data/` layout shown in the template doesn't exist at the project root today. The real equivalents are nested under `latency_bench/`: `run_end_removal_latency.sh` is the run script, `summarize_end_removal.py` is the result/plot script, and `latency_bench/results/` holds the result CSV/JSON instead of a root `data/` folder. Flagging this rather than describing files that aren't actually there — if the grading rubric needs literally-named root files, that's a separate follow-up to add thin wrapper scripts.
-TODO: add wrapper scripts
+`run.sh` and `result.py` are thin wrappers satisfying the course template's mandatory root-level `run.<ext>`/`result.<ext>` entry points — the actual benchmark logic still lives in `latency_bench/`, which they call into, so nothing about how the benchmark itself works changed. `result.py` additionally renders a bar-chart `.jpg` of latency vs. k (the template asks `result.<ext>` to *plot* results, not just tabulate them) and copies the run's raw JSON, summary table, and chart into `data/<run-name>/`. Note: the root `.gitignore`'s `data/` rule was narrowed to `EfficientVLA*/data/` so this root `data/` directory is actually tracked in git — a repo-wide `data/` ignore would have silently hidden every result `result.py` produces.
 
 ## How to Run
 
@@ -125,24 +127,24 @@ git clone git@hf.co:datasets/openvla/modified_libero_rlds data/libero
 - **k=1 / k=3 / k=12 (layer-drop variants)**: cannot use the official checkpoints — their action head has a different block count (24 − k; see `prismatic/models/action_heads.py` in each repo) that only matches a checkpoint trained with that specific repo. Train your own via `vla-scripts/finetune.py` (see each repo's README) from inside the matching `EfficientVLA*` directory.
 
 ### 6. Run the latency benchmark
+Edit `ROOT` and the `CKPT_K0/K1/K3` paths at the top of `latency_bench/run_end_removal_latency.sh` first to match where your checkpoints actually live, then from the project root:
 ```bash
-cd latency_bench
-python bench_end_removal.py \
-  --repo_dir ../EfficientVLALayerDrop \
+./run.sh
+```
+This submits the batch job (`sbatch`), which benchmarks k=0, 1, and 3 back-to-back on one GPU/node. If you're not on a Slurm cluster, `run.sh` will tell you the equivalent direct command, e.g.:
+```bash
+python latency_bench/bench_end_removal.py \
+  --repo_dir EfficientVLALayerDrop \
   --pretrained_checkpoint <path-to-k1-checkpoint> \
   --num_end_layers_drop 1 \
-  --output_json results/k1.json
-```
-Or run all configured k values at once via the batch script (edit `ROOT` and the `CKPT_K0/K1/K3` paths at the top first to match where your checkpoints actually live):
-```bash
-sbatch run_end_removal_latency.sh
+  --output_json latency_bench/results/k1.json
 ```
 
-### 7. Summarize the results
+### 7. Summarize and plot the results
 ```bash
-python summarize_end_removal.py --results_dir results/<run-folder>
+python result.py
 ```
-This writes `end_removal_summary.md` and `.csv` with per-k latency, and `e2e_speedup_vs_k0` — the actual number this project is trying to produce.
+With no arguments this picks the most recently modified run under `latency_bench/results/`; pass `--results_dir latency_bench/results/<run-folder>` to target a specific one. It writes `end_removal_summary.md`/`.csv` (per-k latency and `e2e_speedup_vs_k0` — the actual number this project is trying to produce) plus a `end_removal_latency.jpg` bar chart, copying all of it into `data/<run-name>/`.
 
 ## Demo  
 - All projects must include video(s) demonstrating your project.  

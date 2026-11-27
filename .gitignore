@@ -11,7 +11,7 @@ logs/
 __pycache__/
 *.egg-info/
 outputs/
-data/
+EfficientVLA*/data/
 libero_rlds/
 pretrained_models/
 LIBERO/
