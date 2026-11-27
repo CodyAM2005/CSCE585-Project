@@ -26,7 +26,7 @@ Vision-Language-Action (VLA) models for robot control typically bolt a large pre
 
 ## Contribution  
 ### [`Replication of existing work`], [`Extension of existing work`]  
-We use 'VLA-Adapter: An Effective Paradigm for Tiny-Scale Vision-Language-Action Model' [\https://arxiv.org/abs/2509.09372] to reproduce their results. We improve their method as follows:  
+We use 'VLA-Adapter: An Effective Paradigm for Tiny-Scale Vision-Language-Action Model' [https://arxiv.org/abs/2509.09372] to reproduce their results. We improve their method as follows:  
 - Contribution 1  
 - Contribution 2  
 
